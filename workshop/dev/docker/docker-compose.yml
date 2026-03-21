@@ -1,8 +1,9 @@
 services:
   physical_ai_workspace:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    # build: 
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: sahillathwal/physical-ai-challange-2026
     container_name: lerobot_hackathon_env
     
     # 1. "Hackathon-Proof" Hardware Mounting
