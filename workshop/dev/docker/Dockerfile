@@ -56,7 +56,7 @@ RUN mkdir -p /opt/uv_cache /opt/uv_python && \
 
 # 8. Install PyTorch & Additional Simulation Tools inside the uv venv
 RUN uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 && \
-    uv pip install mujoco opencv-python mediapipe transformers accelerate datasets einops pymoveit2
+    uv pip install mujoco opencv-python mediapipe transformers accelerate datasets einops
 
 # Bridge scripts use system python3 in ROS launch; keep mujoco available there too.
 RUN python3 -m pip install --no-cache-dir mujoco
