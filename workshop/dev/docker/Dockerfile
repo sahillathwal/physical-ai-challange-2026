@@ -30,14 +30,15 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
     apt-get update && apt-get install -y \
     ros-humble-desktop ros-humble-ros-core ros-dev-tools python3-colcon-common-extensions \
     ros-humble-moveit ros-humble-xacro ros-humble-joint-state-publisher-gui \
-    ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-gazebo-ros2-control \
+    ros-humble-ros2-control ros-humble-ros2-controllers \
     && rm -rf /var/lib/apt/lists/*
 
-# 5. Install Gazebo Harmonic (Jetty)
+# 5. Install Gazebo Harmonic + matching ROS 2 Humble bridge
+
 RUN curl -sSL https://packages.osrfoundation.org/gazebo.gpg -o /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null && \
     apt-get update && apt-get install -y \
-    gz-harmonic ros-humble-ros-gz \
+    gz-harmonic ros-humble-ros-gz ros-humble-gz-ros2-control \
     && rm -rf /var/lib/apt/lists/*
 
 # 6. Install 'uv' for Ultra-Fast Python Management
@@ -82,7 +83,8 @@ RUN mkdir -p /home/hacker/workspace/src && \
     git clone https://github.com/sahillathwal/so101_leader_description.git /home/hacker/workspace/src/so101_leader_description && \
     git clone https://github.com/sahillathwal/so101_description.git /home/hacker/workspace/src/so101_description && \
     git clone https://github.com/sahillathwal/so101_gazebo.git /home/hacker/workspace/src/so101_gazebo && \
-    git clone https://github.com/sahillathwal/so101_mujoco.git /home/hacker/workspace/src/so101_mujoco
+    git clone https://github.com/sahillathwal/so101_mujoco.git /home/hacker/workspace/src/so101_mujoco && \
+    git clone https://github.com/sahillathwal/so101_unified_bringup.git /home/hacker/workspace/src/so101_unified_bringup
 
 # 12. Configure bashrc to source ROS 2 and activate the uv environment automatically
 RUN echo "source /opt/ros/humble/setup.bash" >> /home/hacker/.bashrc && \
